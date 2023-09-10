@@ -19,17 +19,17 @@ def main()-> None:
     look_back = 1
 
     #preparing train data
-    train_dataset_path = 'after_preprocessing/train.npy'
+    train_dataset_path = 'train/train.npy'
     train = np.load(train_dataset_path)
     trainX, trainY = create_features_and_target(train, look_back)
 
-    #midel fiting
+    #model fiting
     model = Sequential()
     model.add(LSTM(4, input_shape=(1, look_back)))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam')
     model.fit(trainX, trainY, epochs=100, batch_size=1, verbose=2)
-    model.save('model.keras')
+    model.save('models/model.keras')
 
 
 if __name__ == '__main__':

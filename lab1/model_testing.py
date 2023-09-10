@@ -8,15 +8,15 @@ from model_preparation import create_features_and_target
 
 def main() -> None:
     #preparing test data
-    test_dataset_path = 'after_preprocessing/test.npy'
+    test_dataset_path = 'test/test.npy'
     test = np.load(test_dataset_path)
     testX, testY = create_features_and_target(test, look_back=1)
 
     #load fitted model
-    model = keras.models.load_model('model.keras')
+    model = keras.models.load_model('models/model.keras')
     
     #load fitted scaler
-    with open('scaler.pkl', 'rb') as pkl_file_1:
+    with open('models/scaler.pkl', 'rb') as pkl_file_1:
         scaler = pickle.load(pkl_file_1)
     
     # make predictions
