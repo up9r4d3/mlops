@@ -1,0 +1,489 @@
+Started by GitHub push by up9r4d3
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/mlops
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone repo)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/mlops/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/up9r4d3/mlops.git # timeout=10
+Fetching upstream changes from https://github.com/up9r4d3/mlops.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.42.0'
+ > git fetch --tags --force --progress -- https://github.com/up9r4d3/mlops.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 2cb186d230a89a3cb823ac5919255fac20386dad (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2cb186d230a89a3cb823ac5919255fac20386dad # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main 2cb186d230a89a3cb823ac5919255fac20386dad # timeout=10
+Commit message: "Update README.md"
+ > git rev-list --no-walk f6825f66bcd40655a1f9415818e5c8618b561d9a # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Data_preparetions)
+[Pipeline] sh
++ source /var/lib/jenkins/miniconda3/bin/activate mlops_env
+++ _CONDA_ROOT=/var/lib/jenkins/miniconda3
+++ . /var/lib/jenkins/miniconda3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /var/lib/jenkins/miniconda3/bin/conda
+++++ dirname /var/lib/jenkins/miniconda3/bin
++++ PATH=/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
+++ conda activate mlops_env
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate mlops_env
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1=
++++ __conda_exe shell.posix activate mlops_env
++++ /var/lib/jenkins/miniconda3/bin/conda shell.posix activate mlops_env
+++ ask_conda='PS1='\''(mlops_env) '\''
+export PATH='\''/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin'\''
+export CONDA_PREFIX='\''/var/lib/jenkins/miniconda3/envs/mlops_env'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''mlops_env'\''
+export CONDA_PROMPT_MODIFIER='\''(mlops_env) '\''
+export CONDA_EXE='\''/var/lib/jenkins/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/var/lib/jenkins/miniconda3/bin/python'\'''
+++ eval 'PS1='\''(mlops_env) '\''
+export PATH='\''/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin'\''
+export CONDA_PREFIX='\''/var/lib/jenkins/miniconda3/envs/mlops_env'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''mlops_env'\''
+export CONDA_PROMPT_MODIFIER='\''(mlops_env) '\''
+export CONDA_EXE='\''/var/lib/jenkins/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/var/lib/jenkins/miniconda3/bin/python'\'''
++++ PS1='(mlops_env) '
++++ export PATH=/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ PATH=/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ export CONDA_PREFIX=/var/lib/jenkins/miniconda3/envs/mlops_env
++++ CONDA_PREFIX=/var/lib/jenkins/miniconda3/envs/mlops_env
++++ export CONDA_SHLVL=1
++++ CONDA_SHLVL=1
++++ export CONDA_DEFAULT_ENV=mlops_env
++++ CONDA_DEFAULT_ENV=mlops_env
++++ export 'CONDA_PROMPT_MODIFIER=(mlops_env) '
++++ CONDA_PROMPT_MODIFIER='(mlops_env) '
++++ export CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
++ cd lab2
++ python data_creation.py
++ python data_preprocessing.py
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Model_preparetion)
+[Pipeline] sh
++ source /var/lib/jenkins/miniconda3/bin/activate mlops_env
+++ _CONDA_ROOT=/var/lib/jenkins/miniconda3
+++ . /var/lib/jenkins/miniconda3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /var/lib/jenkins/miniconda3/bin/conda
+++++ dirname /var/lib/jenkins/miniconda3/bin
++++ PATH=/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
+++ conda activate mlops_env
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate mlops_env
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1=
++++ __conda_exe shell.posix activate mlops_env
++++ /var/lib/jenkins/miniconda3/bin/conda shell.posix activate mlops_env
+++ ask_conda='PS1='\''(mlops_env) '\''
+export PATH='\''/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin'\''
+export CONDA_PREFIX='\''/var/lib/jenkins/miniconda3/envs/mlops_env'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''mlops_env'\''
+export CONDA_PROMPT_MODIFIER='\''(mlops_env) '\''
+export CONDA_EXE='\''/var/lib/jenkins/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/var/lib/jenkins/miniconda3/bin/python'\'''
+++ eval 'PS1='\''(mlops_env) '\''
+export PATH='\''/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin'\''
+export CONDA_PREFIX='\''/var/lib/jenkins/miniconda3/envs/mlops_env'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''mlops_env'\''
+export CONDA_PROMPT_MODIFIER='\''(mlops_env) '\''
+export CONDA_EXE='\''/var/lib/jenkins/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/var/lib/jenkins/miniconda3/bin/python'\'''
++++ PS1='(mlops_env) '
++++ export PATH=/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ PATH=/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ export CONDA_PREFIX=/var/lib/jenkins/miniconda3/envs/mlops_env
++++ CONDA_PREFIX=/var/lib/jenkins/miniconda3/envs/mlops_env
++++ export CONDA_SHLVL=1
++++ CONDA_SHLVL=1
++++ export CONDA_DEFAULT_ENV=mlops_env
++++ CONDA_DEFAULT_ENV=mlops_env
++++ export 'CONDA_PROMPT_MODIFIER=(mlops_env) '
++++ CONDA_PROMPT_MODIFIER='(mlops_env) '
++++ export CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
++ cd lab2
++ python model_preparation.py
+2023-09-12 02:05:54.133267: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-09-12 02:05:55.342057: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-09-12 02:05:55.344288: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+Epoch 1/100
+2553/2553 - 5s - loss: 0.0238 - 5s/epoch - 2ms/step
+Epoch 2/100
+2553/2553 - 4s - loss: 0.0109 - 4s/epoch - 1ms/step
+Epoch 3/100
+2553/2553 - 4s - loss: 0.0107 - 4s/epoch - 1ms/step
+Epoch 4/100
+2553/2553 - 4s - loss: 0.0107 - 4s/epoch - 2ms/step
+Epoch 5/100
+2553/2553 - 4s - loss: 0.0106 - 4s/epoch - 1ms/step
+Epoch 6/100
+2553/2553 - 4s - loss: 0.0105 - 4s/epoch - 2ms/step
+Epoch 7/100
+2553/2553 - 4s - loss: 0.0105 - 4s/epoch - 2ms/step
+Epoch 8/100
+2553/2553 - 3s - loss: 0.0104 - 3s/epoch - 1ms/step
+Epoch 9/100
+2553/2553 - 4s - loss: 0.0103 - 4s/epoch - 1ms/step
+Epoch 10/100
+2553/2553 - 4s - loss: 0.0103 - 4s/epoch - 2ms/step
+Epoch 11/100
+2553/2553 - 3s - loss: 0.0103 - 3s/epoch - 1ms/step
+Epoch 12/100
+2553/2553 - 4s - loss: 0.0103 - 4s/epoch - 1ms/step
+Epoch 13/100
+2553/2553 - 3s - loss: 0.0102 - 3s/epoch - 1ms/step
+Epoch 14/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 1ms/step
+Epoch 15/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 1ms/step
+Epoch 16/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 1ms/step
+Epoch 17/100
+2553/2553 - 3s - loss: 0.0102 - 3s/epoch - 1ms/step
+Epoch 18/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 19/100
+2553/2553 - 3s - loss: 0.0102 - 3s/epoch - 1ms/step
+Epoch 20/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 2ms/step
+Epoch 21/100
+2553/2553 - 3s - loss: 0.0102 - 3s/epoch - 1ms/step
+Epoch 22/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 2ms/step
+Epoch 23/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 2ms/step
+Epoch 24/100
+2553/2553 - 3s - loss: 0.0102 - 3s/epoch - 1ms/step
+Epoch 25/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 26/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 27/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 1ms/step
+Epoch 28/100
+2553/2553 - 3s - loss: 0.0102 - 3s/epoch - 1ms/step
+Epoch 29/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 30/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 31/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 32/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 33/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 34/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 35/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 36/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 37/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 2ms/step
+Epoch 38/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 39/100
+2553/2553 - 4s - loss: 0.0102 - 4s/epoch - 1ms/step
+Epoch 40/100
+2553/2553 - 5s - loss: 0.0101 - 5s/epoch - 2ms/step
+Epoch 41/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 42/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 43/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 44/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 45/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 46/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 47/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 48/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 49/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 50/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 51/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 52/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 53/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 54/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 55/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 56/100
+2553/2553 - 5s - loss: 0.0101 - 5s/epoch - 2ms/step
+Epoch 57/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 58/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 59/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 60/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 61/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 62/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 63/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 64/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 65/100
+2553/2553 - 3s - loss: 0.0101 - 3s/epoch - 1ms/step
+Epoch 66/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 67/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 68/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 69/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 70/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 71/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 72/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 73/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 74/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 75/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 76/100
+2553/2553 - 5s - loss: 0.0101 - 5s/epoch - 2ms/step
+Epoch 77/100
+2553/2553 - 5s - loss: 0.0100 - 5s/epoch - 2ms/step
+Epoch 78/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 79/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 80/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 81/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 82/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 83/100
+2553/2553 - 5s - loss: 0.0100 - 5s/epoch - 2ms/step
+Epoch 84/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 85/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 2ms/step
+Epoch 86/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 87/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 88/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 89/100
+2553/2553 - 5s - loss: 0.0101 - 5s/epoch - 2ms/step
+Epoch 90/100
+2553/2553 - 4s - loss: 0.0101 - 4s/epoch - 1ms/step
+Epoch 91/100
+2553/2553 - 4s - loss: 0.0099 - 4s/epoch - 2ms/step
+Epoch 92/100
+2553/2553 - 5s - loss: 0.0100 - 5s/epoch - 2ms/step
+Epoch 93/100
+2553/2553 - 5s - loss: 0.0100 - 5s/epoch - 2ms/step
+Epoch 94/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 95/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 96/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 97/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 98/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 1ms/step
+Epoch 99/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+Epoch 100/100
+2553/2553 - 4s - loss: 0.0100 - 4s/epoch - 2ms/step
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Model_testing)
+[Pipeline] sh
++ source /var/lib/jenkins/miniconda3/bin/activate mlops_env
+++ _CONDA_ROOT=/var/lib/jenkins/miniconda3
+++ . /var/lib/jenkins/miniconda3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ '[' -z '' ']'
++++ export CONDA_SHLVL=0
++++ CONDA_SHLVL=0
++++ '[' -n '' ']'
++++++ dirname /var/lib/jenkins/miniconda3/bin/conda
+++++ dirname /var/lib/jenkins/miniconda3/bin
++++ PATH=/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ export PATH
++++ '[' -z '' ']'
++++ PS1=
+++ conda activate mlops_env
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate mlops_env
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1=
++++ __conda_exe shell.posix activate mlops_env
++++ /var/lib/jenkins/miniconda3/bin/conda shell.posix activate mlops_env
+++ ask_conda='PS1='\''(mlops_env) '\''
+export PATH='\''/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin'\''
+export CONDA_PREFIX='\''/var/lib/jenkins/miniconda3/envs/mlops_env'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''mlops_env'\''
+export CONDA_PROMPT_MODIFIER='\''(mlops_env) '\''
+export CONDA_EXE='\''/var/lib/jenkins/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/var/lib/jenkins/miniconda3/bin/python'\'''
+++ eval 'PS1='\''(mlops_env) '\''
+export PATH='\''/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin'\''
+export CONDA_PREFIX='\''/var/lib/jenkins/miniconda3/envs/mlops_env'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_DEFAULT_ENV='\''mlops_env'\''
+export CONDA_PROMPT_MODIFIER='\''(mlops_env) '\''
+export CONDA_EXE='\''/var/lib/jenkins/miniconda3/bin/conda'\''
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+export CONDA_PYTHON_EXE='\''/var/lib/jenkins/miniconda3/bin/python'\'''
++++ PS1='(mlops_env) '
++++ export PATH=/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ PATH=/var/lib/jenkins/miniconda3/envs/mlops_env/bin:/var/lib/jenkins/miniconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/bin
++++ export CONDA_PREFIX=/var/lib/jenkins/miniconda3/envs/mlops_env
++++ CONDA_PREFIX=/var/lib/jenkins/miniconda3/envs/mlops_env
++++ export CONDA_SHLVL=1
++++ CONDA_SHLVL=1
++++ export CONDA_DEFAULT_ENV=mlops_env
++++ CONDA_DEFAULT_ENV=mlops_env
++++ export 'CONDA_PROMPT_MODIFIER=(mlops_env) '
++++ CONDA_PROMPT_MODIFIER='(mlops_env) '
++++ export CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ CONDA_EXE=/var/lib/jenkins/miniconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
++++ CONDA_PYTHON_EXE=/var/lib/jenkins/miniconda3/bin/python
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
++ cd lab2
++ python model_testing.py
+2023-09-12 02:13:19.807187: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-09-12 02:13:21.125630: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-09-12 02:13:21.127511: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+
+ 1/35 [..............................] - ETA: 8s
+35/35 [==============================] - 0s 546us/step
+Test Score: 3.39 RMSE
+Test Score: 2.60 MAE
+Test Score: 0.17 MPAE
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

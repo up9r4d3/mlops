@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    stages {
+        stage('Clone repo') {
+            steps {
+                // Get some code from a GitHub repository
+                git url: 'https://github.com/up9r4d3/mlops.git', branch: 'main'
+            }
+        }
+        stage('Data_preparetions') {
+            steps {
+                // Change to lab2 directory
+                sh '''
+                    source ~/miniconda3/bin/activate mlops_env
+                    cd lab2
+                    python data_creation.py
+                    python data_preprocessing.py
+                '''
+            }
+        }
+        stage('Model_preparetion') {
+            steps{
+                sh '''
+                    source ~/miniconda3/bin/activate mlops_env
+                    cd lab2
+                    python model_preparation.py
+                '''
+            }
+        }
+        stage('Model_testing') {
+            steps{
+                sh '''
+                    source ~/miniconda3/bin/activate mlops_env
+                    cd lab2
+                    python model_testing.py
+                '''
+            }
+        }
+    }
+}
