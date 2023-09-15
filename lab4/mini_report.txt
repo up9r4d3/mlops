@@ -1,0 +1,77 @@
+cd lab4
+git init
+git branch -m main
+git config --global init.defaultBranch main
+python3 -m venv env
+source env/bin/activate
+pip install dvc
+dvc init
+ls -la
+git status
+git commit -m "Initialize DVC"
+git status
+ls -la
+cd .dvc
+ls -la
+nano .gitignore
+cd ..
+mkdir datasets
+dvc add datasets
+ls -la
+git add .gitignore datasets.dvc
+git status
+nano .gitignore 
+git status
+git add .gitignore datasets.dvc
+git commit -m "Put datasets under control"
+git status
+dvc remote add "mydisk" gdrive://15okA4lthCvifRJ7lZ-5EKcxNWO5Np-zM
+dvc remote list
+git status
+git add .dvc/config
+git commit -m "Goog Disk was added as remote dataset folder"
+pip install dvc-gdrive
+dvc push -r mydisk
+pip install catboost
+ls
+featherpad create_dataset.py 
+python3 create_dataset.py 
+ls datasets/
+dvc add datasets
+git status
+git add create_dataset.py datasets.dvc 
+git commit -m "Add a script file and first dataset version"
+dvc push -r mydisk
+libreoffice datasets/titanic_df.csv 
+ls
+featherpad modify_dataset.py 
+python3 modify_dataset.py 
+ls -la  datasets
+dvc add datasets
+git status
+git add modify_dataset.py datasets.dvc
+git commit -m "Add script and modified dataset"
+dvc push -r mydisk
+feathernotes fillna_df_age.py 
+python3 fillna_df_age.py 
+dvc add datasets
+git add datasets.dvc fillna_df_age.py 
+git commit -m "Add script file and modified dataset fillna mean"
+dvc push -r mydisk
+featherpad one_hot_encoding.py 
+python3 one_hot_encoding.py 
+dvc add datasets
+git add one_hot_encoding.py datasets.dvc 
+git status
+git commit -m "Add script and modified dataset one-hot encoding"
+dvc push -r mydisk
+git log --oneline
+git checkout c123208
+dvc pull -r mydisk
+libreoffice datasets/titanic_df.csv 
+git log --oneline
+git checkout a876052
+git log --oneline
+dvc pull -r mydisk
+libreoffice datasets/titanic_df.csv 
+ls -la
