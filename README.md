@@ -1,1 +1,1 @@
-# mlops.
+# URFU MLOps Course Homeworks
